@@ -1,19 +1,19 @@
 #!/usr/bin/env groovy
 
-def call(){
+def call(String mavenName = 'm3'){
     node {
         stage('Quality Assesment'){
             parallel {
                 stage('Tests'){
                     withMaven(
-                        maven: 'm3'
+                        maven: '${mavenName}'
                     ){
                         sh "mvn test"
                     }
                 }
                 stage('Sonar'){
                     withMaven(
-                        maven: 'm3'
+                        maven: '${mavenName}'
                     ){
                         sh "mvn sonar:sonar"
                     }
@@ -22,14 +22,14 @@ def call(){
         }
         stage('Package'){
             withMaven(
-                maven: 'm3'
+                maven: '${mavenName}'
             ){
                 sh "mvn -B package"
             }
         }
         stage('Push to Nexus'){
             withMaven(
-                maven: 'm3'
+                maven: '${mavenName}'
             ){
                 sh "mvn deploy"
             }
