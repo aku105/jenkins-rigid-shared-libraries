@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def call(String mavenName = 'm3'){
+def call(String mavenName = 'M3'){
     node {
         stage('Tests'){
             withMaven(
