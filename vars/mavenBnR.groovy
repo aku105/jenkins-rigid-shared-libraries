@@ -32,7 +32,7 @@ def call(String mavenName = 'M3'){
         withMaven(
             maven: "${mavenName}"
         ){
-            sh "mvn deploy"
+            sh "mvn deploy -DskipTests -DskipITs"
         }
     }
 
